@@ -19,7 +19,7 @@ export default class Pricing {
   }
 
   set currency(values) {
-    this._currency = new Currency(values.code, values.name);
+    this._currency = values;
   }
 
   displayFullPrice() {
