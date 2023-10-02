@@ -5,5 +5,4 @@ export default function getListStudents() {
     {id: 1, firstName: 'Serena', location: 'San Francisco'},
   ]
   return students;
-
 }
