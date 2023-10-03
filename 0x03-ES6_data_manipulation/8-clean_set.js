@@ -4,6 +4,6 @@ export default function cleanSet(set, startString) {
   }
 
   const filterdArray = Array.from(set).filter((item) => item.startsWith(startString));
-  const cleanArray = filterdArray.map((value) => value.substring(startString.length));
+  const cleanArray = filterdArray.map((value) => typeof value === 'string' && value.substring(startString.length));
   return cleanArray.join('-');
 }
