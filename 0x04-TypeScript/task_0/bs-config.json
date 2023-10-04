@@ -1,0 +1,7 @@
+{
+	"serve": {
+		"basDir": "./",
+		"directory": true
+	},
+	"files": ["**/*,{html,htm,css,js,ts}"]
+}
