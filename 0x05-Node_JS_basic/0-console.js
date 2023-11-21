@@ -4,5 +4,5 @@ function displayMessage(param) {
   console.log(param);
 }
 
-export { displayMessage };
+module.export = displayMessage;
 
