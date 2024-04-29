@@ -12,7 +12,7 @@ function countStudents(param) {
 
   let lines = data.trim().split('\n');
   const total = lines.length - 1;
-  console.log(`Number of studenst ${total}`);
+  console.log(`Number of students ${total}`);
 
   const grouplines = {};
   lines = lines.map((item) => item.split(','));
