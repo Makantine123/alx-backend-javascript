@@ -2,38 +2,42 @@
 
 const fs = require('fs');
 
-function countStudents(fileName) {
-  const students = {};
-  const fields = {};
-  let length = 0;
+function countStudents(param) {
+  let data;
   try {
-    const content = fs.readFileSync(fileName, 'utf-8');
-    const lines = content.toString().split('\n');
-    for (let i = 0; i < lines.length; i += 1) {
-      if (lines[i]) {
-        length += 1;
-        const field = lines[i].toString().split(',');
-        if (Object.prototype.hasOwnProperty.call(students, field[3])) {
-          students[field[3]].push(field[0]);
-        } else {
-          students[field[3]] = [field[0]];
-        }
-        if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
-          fields[field[3]] += 1;
-        } else {
-          fields[field[3]] = 1;
-        }
+    data = fs.readFileSync(param, 'utf8');
+  } catch (err) {
+    throw new Error('Cannot load the database');
+  }
+
+  let lines = data.trim().split('\n');
+  const total = lines.length - 1;
+  console.log(`Number of studenst ${total}`);
+
+  const grouplines = {};
+  lines = lines.map((item) => item.split(','));
+  for (const i in lines) {
+    if (i !== 0) {
+      /* Check if the key is already in grouplines */
+      if (!grouplines[lines[i][3]]) {
+        /* Create the key with empy array as value */
+        grouplines[lines[i][3]] = [];
       }
+      /* Push Student name in to key array */
+      grouplines[lines[i][3]].push(lines[i][0]);
     }
-    const l = length - 1;
-    console.log(`Number of students: ${l}`);
-    for (const [key, value] of Object.entries(fields)) {
-      if (key !== 'field') {
-        console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
-      }
-    }
-  } catch (error) {
-    throw Error('Cannot load the database');
+  }
+  /* Remove the header */
+  delete grouplines.field;
+
+  /* Loop through keys */
+  for (const k in grouplines) {
+    /* Calculate number of students for each key */
+    const numberingroup = grouplines[k].length;
+    /* Create string of named stored for each key */
+    const firstnames = grouplines[k].join(', ');
+    /* Log Statement */
+    console.log(`Number of students in ${k}: ${numberingroup}. List: ${firstnames}`);
   }
 }
 

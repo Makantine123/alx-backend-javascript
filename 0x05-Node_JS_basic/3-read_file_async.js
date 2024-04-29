@@ -1,40 +1,42 @@
-const { readFile } = require('fs');
+/* Script counts students in database.csv file asynchronously */
 
-function countStudents(fileName) {
-  const students = {};
-  const fields = {};
-  let length = 0;
+const fs = require('fs');
+
+function countStudents(param) {
   return new Promise((resolve, reject) => {
-    readFile(fileName, (error, data) => {
-      if (error) {
+    fs.readFile(param, 'utf-8', (err, data) => {
+      if (err) {
         reject(Error('Cannot load the database'));
-      } else {
-        const lines = data.toString().split('\n');
-        for (let i = 0; i < lines.length; i += 1) {
-          if (lines[i]) {
-            length += 1;
-            const field = lines[i].toString().split(',');
-            if (Object.prototype.hasOwnProperty.call(students, field[3])) {
-              students[field[3]].push(field[0]);
-            } else {
-              students[field[3]] = [field[0]];
-            }
-            if (Object.prototype.hasOwnProperty.call(fields, field[3])) {
-              fields[field[3]] += 1;
-            } else {
-              fields[field[3]] = 1;
-            }
-          }
-        }
-        const l = length - 1;
-        console.log(`Number of students: ${l}`);
-        for (const [key, value] of Object.entries(fields)) {
-          if (key !== 'field') {
-            console.log(`Number of students in ${key}: ${value}. List: ${students[key].join(', ')}`);
-          }
-        }
-        resolve(data);
+        return;
       }
+
+      let lines = data.trim().split('\n');
+      const numberStudents = lines.length - 1;
+
+      const msg = [`Number of students: ${numberStudents}`];
+      console.log(msg[0]);
+
+      lines = lines.map((item) => item.split(','));
+      const groupedLines = {};
+      for (const i in lines) {
+        if (i !== 0) {
+          if (!groupedLines[lines[i][3]]) {
+            groupedLines[lines[i][3]] = [];
+          }
+          groupedLines[lines[i][3]].push(lines[i][0]);
+        }
+      }
+      delete groupedLines.field;
+
+      for (const key in groupedLines) {
+        if (key !== 0) {
+          const firstnames = groupedLines[key].join(' ,');
+          const msg2 = `Number of students in ${key}: ${groupedLines[key].length}. List: ${firstnames}`;
+          msg.push(msg2);
+          console.log(msg2);
+        }
+      }
+      resolve(msg);
     });
   });
 }
