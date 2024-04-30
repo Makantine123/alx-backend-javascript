@@ -32,12 +32,14 @@ function countStudents(param) {
 
   /* Loop through keys */
   for (const k in grouplines) {
+    if (Object.hasOwnProperty.call(grouplines, k)) {
     /* Calculate number of students for each key */
-    const numberingroup = grouplines[k].length;
-    /* Create string of named stored for each key */
-    const firstnames = grouplines[k].join(', ');
-    /* Log Statement */
-    console.log(`Number of students in ${k}: ${numberingroup}. List: ${firstnames}`);
+      const numberingroup = grouplines[k].length;
+      /* Create string of named stored for each key */
+      const firstnames = grouplines[k].join(', ');
+      /* Log Statement */
+      console.log(`Number of students in ${k}: ${numberingroup}. List: ${firstnames}`);
+    }
   }
 }
 
