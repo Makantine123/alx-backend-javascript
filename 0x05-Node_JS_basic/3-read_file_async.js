@@ -32,7 +32,7 @@ function countStudents(param) {
         if (key !== 0) {
           const firstnames = groupedLines[key].join(' ,').trim();
           const msg2 = `Number of students in ${key}: ${groupedLines[key].length}. List: ${firstnames}`;
-          msg.push(msg2);
+          msg.push(msg2.trim());
           console.log(msg2);
         }
       }
