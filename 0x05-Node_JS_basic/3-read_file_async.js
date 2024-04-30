@@ -14,7 +14,7 @@ function countStudents(param) {
       const numberStudents = lines.length - 1;
 
       const msg = [`Number of students: ${numberStudents}`];
-      console.log(msg[0]);
+      console.log(msg[0].trim());
 
       lines = lines.map((item) => item.split(','));
       const groupedLines = {};
