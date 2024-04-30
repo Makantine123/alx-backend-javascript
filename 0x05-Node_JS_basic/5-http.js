@@ -48,9 +48,12 @@ const app = http.createServer((req, res) => {
 
   if (req.url === '/') {
     res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
+    res.end();
+  }
+  if (req.url === '/students') {
     const param = process.argv[2];
     countStudents(param);
+    res.end();
   }
 });
 
