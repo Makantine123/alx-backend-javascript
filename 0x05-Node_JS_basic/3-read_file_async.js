@@ -1,6 +1,6 @@
 /* Script counts students in database.csv file asynchronously */
 
-const fs = require('fs');
+const { fs } = require('fs');
 
 function countStudents(param) {
   return new Promise((resolve, reject) => {
@@ -30,7 +30,7 @@ function countStudents(param) {
 
       for (const key in groupedLines) {
         if (key !== 0) {
-          const firstnames = groupedLines[key].join(' ,');
+          const firstnames = groupedLines[key].join(' ,').trim();
           const msg2 = `Number of students in ${key}: ${groupedLines[key].length}. List: ${firstnames}`;
           msg.push(msg2);
           console.log(msg2);
