@@ -20,11 +20,11 @@ const countStudents = (param) => new Promise((resolve, reject) => {
         grouplines[studentRecord[3]].push(studentRecord[0]);
       }
       const message = [];
-      /* console.log(`Number of students: ${studentNumber}`); */
+      console.log(`Number of students: ${studentNumber}`);
       message.push(`Number of students: ${studentNumber}`);
       for (const key in grouplines) {
         if (key) {
-          /* console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`); */
+          console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
           message.push(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
         }
       }
