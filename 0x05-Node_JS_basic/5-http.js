@@ -43,7 +43,7 @@ const app = http.createServer((req, res) => {
     res.end();
   }
   if (req.url === '/students') {
-    res.write('This is a list of students\n');
+    res.write('This is the list of our students\n');
     countStudents(process.argv[2].toString()).then((message) => {
       for (let k = 0; k < message.length; k += 1) {
         res.write(`${message[k]}`);
