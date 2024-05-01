@@ -14,7 +14,7 @@ function countStudents(param) {
       const numberStudents = lines.length - 1;
 
       const msg = [`Number of students: ${numberStudents}`];
-      console.log(msg[0].trim());
+      console.log(msg[0]);
 
       lines = lines.map((item) => item.split(','));
       const groupedLines = {};
@@ -30,7 +30,7 @@ function countStudents(param) {
 
       for (const key in groupedLines) {
         if (key !== 0) {
-          const firstnames = groupedLines[key].join(' ,').trim();
+          const firstnames = groupedLines[key].join(' ,');
           const msg2 = `Number of students in ${key}: ${groupedLines[key].length}. List: ${firstnames}`;
           msg.push(msg2.trim());
           console.log(msg2);
