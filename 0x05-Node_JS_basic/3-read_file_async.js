@@ -4,13 +4,13 @@ const fs = require('fs');
 
 function countStudents(param) {
   return new Promise((resolve, reject) => {
-    fs.readFile(param, 'utf-8', (err, data) => {
+    fs.readFile(param, (err, data) => {
       if (err) {
         reject(Error('Cannot load the database'));
         return;
       }
 
-      let lines = data.trim().split('\n');
+      let lines = data.toString().trim().split('\n');
       const numberStudents = lines.length - 1;
 
       const msg = [`Number of students: ${numberStudents}`];
