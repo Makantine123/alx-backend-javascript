@@ -21,7 +21,9 @@ const countStudents = (param) => new Promise((resolve, reject) => {
       }
       console.log(`Number of students: ${studentNumber}`);
       for (const key in grouplines) {
-        console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
+        if (key) {
+          console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
+        }
       }
       resolve();
     }
