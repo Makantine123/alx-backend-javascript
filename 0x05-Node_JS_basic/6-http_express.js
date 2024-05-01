@@ -20,8 +20,8 @@ app.use((req, res) => {
     <body>
     <pre>Cannot GET ${req.url}</pre>
     </body>
-    </html>`
-  );
+    </html>
+  `);
 });
 
 app.listen(port, () => {
