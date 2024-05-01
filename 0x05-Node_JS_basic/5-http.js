@@ -19,13 +19,16 @@ const countStudents = (param) => new Promise((resolve, reject) => {
         }
         grouplines[studentRecord[3]].push(studentRecord[0]);
       }
+      const message = [];
       console.log(`Number of students: ${studentNumber}`);
+      message.push(`Number of students: ${studentNumber}`);
       for (const key in grouplines) {
         if (key) {
           console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
+          message.push(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
         }
       }
-      resolve();
+      resolve(message);
     }
   });
 });
@@ -40,9 +43,16 @@ const app = http.createServer((req, res) => {
     res.end();
   }
   if (req.url === '/students') {
-    const param = process.argv[2];
-    countStudents(param);
-    res.end();
+    res.write('This is a list of students\n');
+    countStudents(process.argv[2].toString()).then((message) => {
+      for (let k = 0; k < message.length; k += 1) {
+        res.write(`${message[k]}`);
+        if (k + 1 < message.length) {
+          res.write('\n');
+        }
+      }
+      res.end();
+    });
   }
 });
 
