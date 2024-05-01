@@ -1,45 +1,34 @@
-/* Script creates HTTP server using Nodes HHTP module */
+/* Script counts students in database.csv asynchronously */
 
 const fs = require('fs');
 
-function countStudents(param) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(param, 'utf-8', (err, data) => {
-      if (err) {
-        reject(Error('Cannot load the database'));
-        return;
+const countStudents = (param) => new Promise((resolve, reject) => {
+  fs.readFile(param, 'utf-8', (err, data) => {
+    if (err) {
+      reject(new Error('Cannot load the database'));
+    }
+    if (data) {
+      const lines = data.toString('utf-8').trim().split('\n');
+      const studentNumber = lines.length - 1;
+      const grouplines = {};
+
+      for (let i = 1; i <= studentNumber; i += 1) {
+        const studentRecord = lines[i].split(',');
+        if (!grouplines[studentRecord[3]]) {
+          grouplines[studentRecord[3]] = [];
+        }
+        grouplines[studentRecord[3]].push(studentRecord[0]);
       }
-
-      let lines = data.trim().split('\n');
-      const numberStudents = lines.length - 1;
-
-      const msg = [`Number of students: ${numberStudents}`];
-      console.log(msg[0].trim());
-
-      lines = lines.map((item) => item.split(','));
-      const groupedLines = {};
-      for (const i in lines) {
-        if (i !== 0) {
-          if (!groupedLines[lines[i][3]]) {
-            groupedLines[lines[i][3]] = [];
-          }
-          groupedLines[lines[i][3]].push(lines[i][0]);
+      console.log(`Number of students: ${studentNumber}`);
+      for (const key in grouplines) {
+        if (key) {
+          console.log(`Number of students in ${key}: ${grouplines[key].length}. List: ${grouplines[key].join(', ')}`);
         }
       }
-      delete groupedLines.field;
-
-      for (const key in groupedLines) {
-        if (key !== 0) {
-          const firstnames = groupedLines[key].join(' ,').trim();
-          const msg2 = `Number of students in ${key}: ${groupedLines[key].length}. List: ${firstnames}`;
-          msg.push(msg2.trim());
-          console.log(msg2);
-        }
-      }
-      resolve(msg);
-    });
+      resolve();
+    }
   });
-}
+});
 
 const http = require('http');
 
