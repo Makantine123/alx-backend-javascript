@@ -10,8 +10,8 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
-  res.status(404).send(
-    `<!DOCTYPE html>
+  res.status(404).send(`
+    <!DOCTYPE html>
     <html lang="en">
     <head>
     <meta charset="utf-8">
