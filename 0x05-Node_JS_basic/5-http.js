@@ -54,9 +54,8 @@ const app = http.createServer((req, res) => {
         }
         res.end();
       })
-      .catch(() => {
-        res.statusCode = 404;
-        res.end('Cannotload the database');
+      .catch((error) => {
+        res.end(error instanceof Error ? error.message : error.toString());
       });
   }
 });
