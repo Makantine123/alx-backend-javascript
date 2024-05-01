@@ -36,7 +36,7 @@ function countStudents(param) {
           console.log(msg2);
         }
       }
-      resolve();
+      resolve(msg);
     });
   });
 }
