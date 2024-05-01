@@ -44,15 +44,20 @@ const app = http.createServer((req, res) => {
   }
   if (req.url === '/students') {
     res.write('This is the list of our students\n');
-    countStudents(process.argv[2].toString()).then((message) => {
-      for (let k = 0; k < message.length; k += 1) {
-        res.write(`${message[k]}`);
-        if (k + 1 < message.length) {
-          res.write('\n');
+    countStudents(process.argv[2].toString())
+      .then((message) => {
+        for (let k = 0; k < message.length; k += 1) {
+          res.write(`${message[k]}`);
+          if (k + 1 < message.length) {
+            res.write('\n');
+          }
         }
-      }
-      res.end();
-    });
+        res.end();
+      })
+      .catch(() => {
+        res.statusCode = 404;
+        res.end('Cannotload the database');
+      });
   }
 });
 
