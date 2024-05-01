@@ -1,6 +1,6 @@
 /* Script counts students in database.csv file asynchronously */
 
-const { fs } = require('fs');
+const fs = require('fs');
 
 function countStudents(param) {
   return new Promise((resolve, reject) => {
