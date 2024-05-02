@@ -1,6 +1,6 @@
 // Server
 
-import AppRoutes from './routes/index';
+const AppRoutes = require('./routes/index');
 
 const express = require('express');
 
@@ -12,4 +12,4 @@ app.use('/students', AppRoutes);
 app.use('/students/:major', AppRoutes);
 app.listen(port);
 
-export default app;
+module.exports = app;

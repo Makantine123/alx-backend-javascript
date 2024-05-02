@@ -1,52 +1,45 @@
 /* Class name StudentsController */
 
-import readDatabase from '../utils';
+const {RedisSearchLanguages} = require('redis');
+const readDatabase = require('../utils');
 
 class StudentsController {
   static getAllStudents(request, response) {
     response.status = 200;
-    response.send('This is the list of our students');
 
+    response.write('This is the list of our students\n');
     readDatabase(process.argv[2].toString())
       .then((grouplines) => {
-        grouplines.sort();
-        for (let k = 1; k < grouplines.length; k += 1) {
-          response.send(`Number of students is ${grouplines[k]}: ${grouplines[k].length}. List: ${grouplines[k].join(', ')}`);
-          if (k + 1 < grouplines.length) {
-            response.send('\n');
+        const keys = Object.keys(grouplines).sort();
+        for (let k = 0; k < keys.length; k += 1) {
+          response.write(`Number of students in ${keys[k]}: ${grouplines[keys[k]].length}. List: ${grouplines[keys[k]].join(', ')}`);
+          if (k + 1 < keys.length) {
+            response.write('\n');
           }
         }
         response.end();
       })
       .catch((error) => {
-        response.status = 500;
-        response.send(error instanceof Error ? error.message : error.toString());
+        response.end(error instanceof Error ? error.message : error.toString());
       });
   }
 
   static getAllStudentsByMajor(request, response) {
-    response.status = 200;
-
     // Extracts the 'major' parameter from the query string of the HTTP request.
     // @type {string} The value of the 'major' parameter.
-    const { major } = request.query;
-
-    if (!major || (major !== 'CS' && major !== 'SWE')) {
-      response.status = 500;
-      response.send('Major parameter must be CS or SWE');
-    }
+    const major = request.params.major;
     readDatabase(process.argv[2].toString())
       .then((grouplines) => {
-        const firstnames = grouplines[major];
-        if (firstnames) {
-          response.send(`List: ${firstnames.join(', ')}`);
-          // response.write('\n');
+        if (!(major in grouplines)) {
+          response.status(500).send('Major parameter must be CS or SWE');
+        } else {
+          response.status(200);
+          response.end(`List: ${grouplines[major].join(', ')}`);
         }
-        response.end();
       })
       .catch((error) => {
-        response.status = 500;
-        response.send(error instanceof Error ? error.message : error.toString());
+        response.status(500);
+        response.end(error instanceof Error ? error.message : error.toString());
       });
   }
 }

@@ -3,7 +3,7 @@
 class AppController {
   static getHomepage(request, response) {
     response.status = 200;
-    response.semd('Hello Holberton School!');
+    response.end('Hello Holberton School!');
   }
 }
 
