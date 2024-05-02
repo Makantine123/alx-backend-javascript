@@ -1,6 +1,5 @@
 /* Class name StudentsController */
 
-const {RedisSearchLanguages} = require('redis');
 const readDatabase = require('../utils');
 
 class StudentsController {
@@ -25,9 +24,7 @@ class StudentsController {
   }
 
   static getAllStudentsByMajor(request, response) {
-    // Extracts the 'major' parameter from the query string of the HTTP request.
-    // @type {string} The value of the 'major' parameter.
-    const major = request.params.major;
+    const { major } = request.params;
     readDatabase(process.argv[2].toString())
       .then((grouplines) => {
         if (!(major in grouplines)) {

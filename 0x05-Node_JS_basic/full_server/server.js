@@ -1,15 +1,14 @@
 // Server
 
-const AppRoutes = require('./routes/index');
-
 const express = require('express');
+
+const AppRoutes = require('./routes/index');
 
 const app = express();
 const port = 1245;
 
-app.use('/', AppRoutes);
-app.use('/students', AppRoutes);
-app.use('/students/:major', AppRoutes);
-app.listen(port);
+app.use(AppRoutes).listen((port), () => {
+  console.log('Server Running');
+});
 
 module.exports = app;
