@@ -1,5 +1,7 @@
-import { assert } from 'assert';
+const assert = require('assert');
+const { it, describe } = require('mocha');
 const calculateNumber = require('./0-calcul');
+
 
 describe('calculateNumber', function () {
   it('should return the sum of twon rounded numbers', () => {
