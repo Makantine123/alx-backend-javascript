@@ -19,6 +19,7 @@ class StudentsController {
         response.end();
       })
       .catch((error) => {
+        response.status(500);
         response.end(error instanceof Error ? error.message : error.toString());
       });
   }
