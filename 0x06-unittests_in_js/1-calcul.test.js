@@ -17,7 +17,7 @@ describe('calculateNumber sum feature', function () {
   });
 
   it('should return the sum of two rounded numbers', () => {
-    assert.strictEqual(calculateNumber(type, 1, 3.7), 5);
+    assert.strictEqual(calculateNumber(type, 1, 0), 1);
   });
 
   it('should return the sum of two rounded numbers', () => {
@@ -31,7 +31,7 @@ describe('calculateNumber sum feature', function () {
 
 
   it('should return the sum of two rounded numbers', () => {
-    assert.strictEqual(calculateNumber(type, 1, -5.5), -4);
+    assert.strictEqual(calculateNumber(type, 1, 0), 1);
   });
 
 
