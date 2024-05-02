@@ -17,11 +17,25 @@ describe('calculateNumber', function () {
   });
 
   it('should return the sum of two rounded numbers', () => {
-    assert.strictEqual(calculateNumber(1, 3.7), 5);
+    assert.strictEqual(calculateNumber(1, 0), 1);
   });
 
   it('should return the sum of two rounded numbers', () => {
-    assert.strictEqual(calculateNumber(1, 5.5), 7);
+    assert.strictEqual(calculateNumber(0, 0), 0);
+  });
+
+  it('should return the sum of two rounded numbers', () => {
+    assert.strictEqual(calculateNumber(-1, -5.5), -6);
+  });
+
+
+  it('should return the sum of two rounded numbers', () => {
+    assert.strictEqual(calculateNumber(1, 0), 1);
+  });
+
+
+  it('should return the sum of two rounded numbers', () => {
+    assert.strictEqual(calculateNumber(-1, 5.5), 5);
   });
 
 });
