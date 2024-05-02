@@ -1,4 +1,4 @@
-/* calculateNumber function */
+/* This script contains calculateNumber function */
 
 function calculateNumber(a, b) {
   const sum = Math.round(a) + Math.round(b);
