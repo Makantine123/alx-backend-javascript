@@ -34,7 +34,7 @@ class StudentsController {
           response.status(500).send('Major parameter must be CS or SWE');
         } else {
           response.status(200);
-          response.end(`List: ${grouplines[major].join(', ')}`);
+          response.send(`List: ${grouplines[major].join(', ')}`);
         }
       })
       .catch((error) => {
