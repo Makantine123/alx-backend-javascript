@@ -37,5 +37,7 @@ describe('calculateNumber', function () {
   it('should return the sum of two rounded numbers', () => {
     assert.strictEqual(calculateNumber(-1, 5.5), 5);
   });
-
+  it('should return the sum of two rounded numbers', () => {
+    assert.strictEqual(calculateNumber(1.5, 3.2), 5);
+  });
 });
