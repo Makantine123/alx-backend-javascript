@@ -27,4 +27,8 @@ describe('Index page', () => {
   it('Server', () => {
     assert.strictEqual(server.listening, true);
   });
+
+  after(() => {
+    server.close();
+  });
 });
